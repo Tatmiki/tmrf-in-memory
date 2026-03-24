@@ -1,0 +1,16 @@
+# Ignorar dados e features extraídas
+data/raw/*
+data/features/*
+!data/raw/.gitkeep
+!data/features/.gitkeep
+
+# Ignorar arquivos de ambiente virtual
+.venv/
+.env
+
+# Ignorar metadados de build do Python (O que você acabou de gerar)
+*.egg-info/
+build/
+dist/
+__pycache__/
+*.pyc
