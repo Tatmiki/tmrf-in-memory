@@ -12,6 +12,10 @@ authors = [
 readme = "README.md"
 requires-python = ">=3.10"
 
+dependencies = [
+    "kaggle>=1.6.0",
+    "python-dotenv>=1.0.0"
+]
 
 # Configuração para que o setuptools encontre o seu código 
 # dentro da pasta src/python automaticamente
