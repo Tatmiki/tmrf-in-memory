@@ -14,7 +14,7 @@ DESTINATION_FOLDER = PROJECT_ROOT / "data" / "raw"
 ENV_PATH = PROJECT_ROOT / ".env"
 
 # ─────────────────────────────────────────────
-# Lista de Datasets a Baixar
+# Lista de datasets a serem baixados
 # Adicione ou remova entradas conforme necessário.
 # Formato: "owner/dataset-name" (igual à URL do Kaggle)
 # ─────────────────────────────────────────────
@@ -23,7 +23,9 @@ KAGGLE_DATASETS = [
     "elkamel/corel-images",
 ]
 
-
+# ─────────────────────────────────────────────
+# Funções de apoio
+# ─────────────────────────────────────────────
 def load_animation(message: str, stop_event: threading.Event):
     """Exibe uma animação de spinner no terminal enquanto parar_evento não for acionado."""
     spinner = itertools.cycle(["⠋", "⠙", "⠹", "⠸", "⠼", "⠴", "⠦", "⠧", "⠇", "⠏"])
@@ -31,6 +33,7 @@ def load_animation(message: str, stop_event: threading.Event):
         print(f"\r  {next(spinner)} {message}", end="", flush=True)
         time.sleep(0.1)
     print(f"\r    [SUCESSO]: Download concluído!{' ' * 100}")  # limpa a linha ao terminar
+
 
 def authenticate_kaggle() -> object | None:
     """Carrega credenciais do .env e retorna uma instância autenticada da API do Kaggle."""
@@ -67,10 +70,7 @@ def authenticate_kaggle() -> object | None:
 
 
 def download_dataset(api, dataset: str, destination: Path) -> bool:
-    """
-    Faz o download e extração de um único dataset.
-    Retorna True em caso de sucesso, False em caso de falha.
-    """
+    """ Faz o download e extração de um único dataset. Retorna True em caso de sucesso, False em caso de falha."""
     dataset_folder = destination / dataset.replace("/", "_")
     dataset_folder.mkdir(parents=True, exist_ok=True)
 
@@ -90,7 +90,9 @@ def download_dataset(api, dataset: str, destination: Path) -> bool:
         stop_thread.set() # simboliza parada pra thread
         thread.join() # espera a thread terminar antes de continuar
 
-
+# ─────────────────────────────────────────────
+# MAIN
+# ─────────────────────────────────────────────
 def main():
     print("=" * 55)
     print("   Download de Datasets do Kaggle")
@@ -135,6 +137,6 @@ def main():
             print(f"    • {ds}")
     print("=" * 55)
 
-
+# Chamada do main()
 if __name__ == "__main__":
     main()
