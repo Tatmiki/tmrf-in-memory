@@ -14,7 +14,11 @@ requires-python = ">=3.10"
 
 dependencies = [
     "kaggle>=1.6.0",
-    "python-dotenv>=1.0.0"
+    "python-dotenv>=1.0.0",
+    "numpy>=1.26.0",
+    "pandas>=2.2.0",
+    "opencv-python>=4.9.0",
+    "scikit-image>=0.22.0"
 ]
 
 # Configuração para que o setuptools encontre o seu código 
