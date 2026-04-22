@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "cbir_feature_extractor"
-version = "0.3.0"
+version = "0.4.0"
 description = "Módulo Python para extração de características de imagens testes de CBIR"
 authors = [
     { name = "João Henrique V. do Carmo", email = "joaohvc1@gmail.com" }
@@ -19,7 +19,8 @@ dependencies = [
     "pandas>=2.2.0",
     "opencv-python>=4.9.0",
     "scikit-image>=0.22.0",
-    "mahotas>=1.4.13"
+    "mahotas>=1.4.13",
+    "tqdm>=4.60"
 ]
 
 # Configuração para que o setuptools encontre o seu código 
