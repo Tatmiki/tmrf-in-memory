@@ -18,7 +18,7 @@ CSV_OUTPUT_PATH = BASE_DIR / "features"
 # ─────────────────────────────────────────────
 
 # DATASET: COVID-19 Radiography Database (https://www.kaggle.com/datasets/tawsifurrahman/covid19-radiography-database)
-def extract_covid_dataset_to_csv(paths: list[str]):
+def extract_covid_dataset_to_csv(paths: list[str], qtd: int=0):
     """Extrai as características das imagens de radiografia de pulmões em diferentes situações, incluindo a de COVID-19, e salva em um arquivo CSV."""
     extractions = ['gray', 'fos','glcm', 'sfm', 'lte']
     for i, extractor in enumerate(extractions):
@@ -27,7 +27,9 @@ def extract_covid_dataset_to_csv(paths: list[str]):
         
         print(f'>>> Extractor: {extractor}')
         for index, value in enumerate(paths):
-            (extractions, files) = extract_feature_dataset(paths[index], extractor=extractor, qtd=len(os.listdir(value)))
+            if qtd <= 0:
+                qtd = len(os.listdir(value))
+            (extractions, files) = extract_feature_dataset(paths[index], extractor=extractor, qtd=qtd)
             dataset = dataset + extractions
             dataset_files = dataset_files + files
 
@@ -69,7 +71,7 @@ def extract_corel_dataset_to_csv(paths: list[str]):
 
 def main():
     paths = [ d for d in Path(COVID_DATASET_PATH).iterdir() ]
-    extract_covid_dataset_to_csv(paths)
+    extract_covid_dataset_to_csv(paths, 1000)
     
     paths = [ d for d in Path(COREL_DATASET_PATH).iterdir() ]
     extract_corel_dataset_to_csv(paths)
