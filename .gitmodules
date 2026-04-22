@@ -1,0 +1,3 @@
+[submodule "src/python/external/pyfeats"]
+	path = src/python/external/pyfeats
+	url = https://github.com/giakou4/pyfeats.git
