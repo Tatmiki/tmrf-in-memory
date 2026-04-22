@@ -156,6 +156,11 @@ def extract_feature_dataset(path: str, extractor: str='color', qtd: int=100):
             
         images_name.append(img_name)
         categories.append(category)
+        
+        features = np.array(features, dtype=np.float32) # Converte para float (evita problemas com dtype)
+        features = normalize_l2(features) # Normalização L2 por vetor
         features = np.append(features, category)
-        data.append((features))
+
+        data.append(features)
+        
     return data, images_name
