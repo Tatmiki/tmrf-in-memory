@@ -31,12 +31,11 @@ def extract_covid_dataset_to_csv(paths: list[str]):
             dataset = dataset + extractions
             dataset_files = dataset_files + files
 
-        df_data = pd.DataFrame(dataset)
+        df_data = pd.DataFrame(dataset) # Criação do DataFrame
+        df_data.columns = [*df_data.columns[:-1], 'category'] # Ajusta nome da última coluna como 'category'
+        df_data['file'] = dataset_files # Adiciona coluna de arquivos
         
-        df_data.columns = [*df_data.columns[:-1], 'category']
-        
-        df_data['file'] = dataset_files
-        
+        # Caminho de saída
         output_path = f"{CSV_OUTPUT_PATH}/covid_{extractor}.csv"
         df_data.to_csv(output_path, index=False)
         
@@ -58,18 +57,12 @@ def extract_corel_dataset_to_csv(paths: list[str]):
         dataset.extend(features_list)
         dataset_files.extend(files)
 
-        # Criação do DataFrame
-        df_data = pd.DataFrame(dataset)
-
-        # Ajusta nome da última coluna como 'category'
-        df_data.columns = [*df_data.columns[:-1], 'category']
-
-        # Adiciona coluna de arquivos
-        df_data['file'] = dataset_files
+        df_data = pd.DataFrame(dataset) # Criação do DataFrame
+        df_data.columns = [*df_data.columns[:-1], 'category'] # Ajusta nome da última coluna como 'category'
+        df_data['file'] = dataset_files # Adiciona coluna de arquivos
 
         # Caminho de saída
         output_path = os.path.join(CSV_OUTPUT_PATH, f"corel_{extractor}.csv")
-
         df_data.to_csv(output_path, index=False)
 
         print(f"CSV salvo em: {output_path}\n")
